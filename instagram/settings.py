@@ -1,4 +1,5 @@
 import os
+import django_heroku
 import dj_database_url
 from decouple import config, Csv
 
@@ -136,3 +137,4 @@ STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+django_heroku.settings(locals())
