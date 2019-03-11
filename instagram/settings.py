@@ -1,4 +1,6 @@
 import os
+import dj_database_url
+from decouple import config, Csv
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
@@ -11,11 +13,6 @@ EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-
-UPLOADCARE = {
-    'pub_key': config('pub_key'),
-    'secret': config('secret'),
-}
 
 if config('MODE')=="dev":
     DATABASES = {
@@ -111,6 +108,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+UPLOADCARE = {
+    'pub_key': config('pub_key'),
+    'secret': config('secret'),
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
