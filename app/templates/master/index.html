@@ -1,0 +1,65 @@
+{%extends 'master/base.html'%}
+
+{% block content %}
+{{block.super}}
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-1">
+    </div>
+
+    <div class="col-md-5 phone_img">
+      <div class="data_inphone"></div>
+    </div>
+
+    <div class="col-md-1">
+    </div>
+
+    <div class="col-md-4">
+      <br>
+      <div class="bord">
+        <form action="/accounts/register/" method="post">
+          <input type='hidden' name='csrfmiddlewaretoken' value='9dBqTRLuHybDMrQf0KYGK3XBydA8G9ffEdr1AqqobTXqqscZMuVg0LQ6eEbCyDrX' />
+          <center><p class="inst_name">Instagram<p></center>
+          <center><p class="inst_name2">Sign up to see photos and <br>videos from your friends.</p></center>
+          <input type="submit" class="btn btn-primary btn-sm" value="Log in with Facebook" style='text-align:center;font-family"Roboto", sans-serif;font-size:14px;width:100%;margin-top:20px;'>
+
+          <div class='fieldWrapper'>
+            <h5 style='text-align:center;font-family"Roboto", sans-serif;font-size:14px;'>Username</h5>
+            <p style='width:100%;text-align:center;'><input type="text" name="username" maxlength="150" autofocus required id="id_username" /></p>
+          </div>
+
+
+          <div class='fieldWrapper'>
+            <h5 style='text-align:center;font-family"Roboto", sans-serif;font-size:14px;'>Email</h5>
+            <p style='width:100%;text-align:center;'><input type="email" name="email" required id="id_email" /></p>
+          </div>
+
+
+          <div class='fieldWrapper'>
+            <h5 style='text-align:center;font-family"Roboto", sans-serif;font-size:14px;'>Password</h5>
+            <p style='width:100%;text-align:center;'><input type="password" name="password1" required id="id_password1" /></p>
+          </div>
+
+
+          <div class='fieldWrapper'>
+            <h5 style='text-align:center;font-family"Roboto", sans-serif;font-size:14px;'>Password confirmation</h5>
+            <p style='width:100%;text-align:center;'><input type="password" name="password2" required id="id_password2" /></p>
+          </div>
+
+
+
+          <input type="submit" class="btn btn-primary btn-sm" value="Sign Up" style='text-align:center;font-family"Roboto", sans-serif;font-size:14px;width:100%;margin-top:20px;'>
+          <h5 style='color:grey;text-align:center;font-size:15px;padding-top:20px;'>By signing up, you agree to our <br><strong><a href='https://help.instagram.com/581066165581870' style='color:grey'>Terms</a></strong>, <strong><a href='https://help.instagram.com/519522125107875'
+                style='color:grey'>Data Policy</strong> and <strong><a href='https://www.instagram.com/legal/cookies/' style='color:grey'>Cookies <br> Policy</strong></a></h5>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-1">
+    </div>
+  </div>
+</div>
+
+{% endblock %}
