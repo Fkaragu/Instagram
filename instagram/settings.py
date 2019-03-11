@@ -4,6 +4,7 @@ import dj_database_url
 from decouple import config, Csv
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 SECRET_KEY = config('SECRET_KEY')
 MODE=config("MODE", default="dev")
 DEBUG = config('DEBUG', default=False, cast=bool)
