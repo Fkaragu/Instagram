@@ -1,1 +1,10 @@
-<h3>User has been successfully created. Please login in<h3/>
+{% extends 'registration/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+  <div class="section">
+    <p><a href="/accounts/login/">Sign In</a></p>
+  </div>
+  <p>User has been successfully created. Please login in<p/>
+  {% endblock %}

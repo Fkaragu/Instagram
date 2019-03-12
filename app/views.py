@@ -52,9 +52,11 @@ def activate(request, uidb64, token):
 def profile(request, username):
     profile = User.objects.get(username=username)
     try:
-        profile_details = Profile.get_by_id(profile.id)
+        #profile_details = Profile.get_by_id(profile.id)
+        profile_details = Profile.objects.all()
     except:
-        profile_details = Profile.filter_by_id(profile.id)
+        #profile_details = Profile.filter_by_id(profile.id)
+        profile_details = Profile.objects.all()
     images = Image.get_profile_images(profile.id)
     title = f'@{profile.username} Instagram photos and videos'
     return render(request, 'profile/profile.html', {'title':title, 'profile':profile, 'profile_details':profile_details, 'images':images})
