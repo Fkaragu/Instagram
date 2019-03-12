@@ -25,12 +25,10 @@ def signup(request):
             form = SignupForm(request.POST)
             if form.is_valid():
                 user = form.save(commit=False)
-                user.is_active = False
+                user.is_active = True
                 user.save()
-                current_site = get_current_site(request)
-                to_email = form.cleaned_data.get('email')
-                send_activation_email(user, current_site, to_email)
-                return render(request, 'registration/success.html')
+                return HttpResponse('User has been successfully created. Please sign in now')
+                
         else:
             form = SignupForm()
             return render(request, 'registration/signup.html',{'form':form})
