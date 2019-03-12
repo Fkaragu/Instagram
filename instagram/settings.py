@@ -1,51 +1,31 @@
 import os
-import django_heroku
 import dj_database_url
 from decouple import config, Csv
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = config('SECRET_KEY')
-MODE=config("MODE", default="dev")
-DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = []
-
+# Email configurations
 EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
-if config('MODE')=="dev":
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('DBNAME'),
-            'USER': config('DBUSER'),
-            'PASSWORD': config('DBPASS')
-        }
-    }
-# production
-else:
-   DATABASES = {
-       'default': dj_database_url.config(
-           default=config('DATABASE_URL')
-       )
-   }
+MODE=config("MODE", default="dev")
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+ALLOWED_HOSTS = ['*']
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'instagram',
-#        'USER': 'francs',
-#    'PASSWORD':'master',
-#    }
-#}
+UPLOADCARE = {
+    'pub_key': config('pub_key'),
+    'secret': config('secret'),
+}
+
+# Application definition
 
 INSTALLED_APPS = [
     'app',
     'tinymce',
-    'bootstrap3',
     'bootstrap4',
     'pyuploadcare.dj',
     'django.contrib.admin',
@@ -89,20 +69,22 @@ TEMPLATES = [
 WSGI_APPLICATION = 'instagram.wsgi.application'
 LOGIN_REDIRECT_URL = '/home'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
-
-
-# Password validation
-# https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
+if config('MODE')=="dev":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('DBNAME'),
+            'USER': config('DBUSER'),
+            'PASSWORD': config('DBPASS')
+        }
+    }
+# production
+else:
+   DATABASES = {
+       'default': dj_database_url.config(
+           default=config('DATABASE_URL')
+       )
+   }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -119,22 +101,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-UPLOADCARE = {
-    'pub_key': config('pub_key'),
-    'secret': config('secret'),
-}
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.11/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Africa/Nairobi'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 db_from_env=dj_database_url.config(conn_max_age=500)
@@ -147,4 +117,3 @@ STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-django_heroku.settings(locals())
