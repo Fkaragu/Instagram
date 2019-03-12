@@ -27,8 +27,8 @@ def signup(request):
                 user = form.save(commit=False)
                 user.is_active = True
                 user.save()
-                return HttpResponse('User has been successfully created. Please sign in now')
-                
+                return render(request, 'registration/success.html')
+
         else:
             form = SignupForm()
             return render(request, 'registration/signup.html',{'form':form})
